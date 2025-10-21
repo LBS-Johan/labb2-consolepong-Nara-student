@@ -14,6 +14,9 @@ namespace Labb2_ConsolePong
 
         Paddle player1;
         Paddle player2;
+        Ball ball;
+
+        List<int> randomDirection = new List<int> { -1, 1 };
         public void StartGame()
         {
             // Setup konsol-fönstret
@@ -21,8 +24,13 @@ namespace Labb2_ConsolePong
             height = Console.WindowHeight;
             Console.CursorVisible = false;
 
-            player1 = new Paddle(0, 10, 5);
-            player2 = new Paddle(100, 10, 5);
+            //Random direction 
+            Random random = new Random();
+
+            //sets players and ball position
+            player1 = new Paddle(3, 10, 5);
+            player2 = new Paddle(width - 3, 10, 5);
+            ball = new Ball(width/2, 0, randomDirection[random.Next(0, 2)], 1);
         }
 
         public bool Run()
@@ -30,8 +38,14 @@ namespace Labb2_ConsolePong
             //Töm hela skärmen i början av varje uppdatering.
             Console.Clear();
 
+            //Players
             player1.Draw();
             player2.Draw();
+
+            //Ball
+            ball.Move();
+            ball.Draw();
+            ball.CheckCollisions(player1, player2, width, height);
 
             //Player 2
             if (Input.IsPressed(ConsoleKey.UpArrow))

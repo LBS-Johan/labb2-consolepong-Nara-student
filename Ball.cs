@@ -13,6 +13,8 @@ namespace Labb2_ConsolePong
         private int y;
         private int yVelocity;
 
+        List<int> randomDirection = new List<int> {-1, 1};
+
         public Ball(int x, int y, int xVelocity, int yVelocity)
         {
             this.x = x;
@@ -35,6 +37,7 @@ namespace Labb2_ConsolePong
 
         public void CheckCollisions(Paddle player1, Paddle player2, int width, int height)
         {
+            //bounce on y axis
             if(y == 0)
             {
                 yVelocity = 1;
@@ -45,9 +48,25 @@ namespace Labb2_ConsolePong
                 yVelocity = -1;
             }
 
+            //checks if ball hits goal
             if(x == 0 || x == width - 1)
             {
-                x = 100;
+                x = width/2;
+
+                Random random = new Random();
+                xVelocity = randomDirection[random.Next(0, 2)];
+            }
+
+            //collision with player 2
+            if(x == player2.x && (y == player2.y || y == player2.y + player2.size))
+            {
+                xVelocity = -1;
+            }
+
+            //collision with player 1
+            if (x == player1.x && (y == player1.y || y == player1.y + player1.size))
+            {
+                xVelocity = 1;
             }
         }
     }

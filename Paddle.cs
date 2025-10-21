@@ -8,9 +8,9 @@ namespace Labb2_ConsolePong
 {
     internal class Paddle
     {
-        private int x;
-        private int y;
-        private int size;
+        public int x;
+        public int y;
+        public int size;
 
         public Paddle(int x, int y, int size)
         {
@@ -21,7 +21,9 @@ namespace Labb2_ConsolePong
 
         public void Move(int yAmount)
         {
-            //if(y != 0)
+            //checks if paddle doesnt reach border 
+            int newYPosition = y + yAmount;
+            if(newYPosition != 0 && newYPosition + size != Console.WindowHeight - 1)
             {
                 y += yAmount;
             }
