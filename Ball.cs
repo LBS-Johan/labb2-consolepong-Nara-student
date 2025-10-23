@@ -48,23 +48,41 @@ namespace Labb2_ConsolePong
                 yVelocity = -1;
             }
 
-            //checks if ball hits goal
-            if(x == 0 || x == width - 1)
+            //checks if ball hits goal of player 1
+            if(x == 0)
             {
-                x = width/2;
+                //puts it back in middle
+                x = width / 2;
 
+                //randomizes X direction
                 Random random = new Random();
                 xVelocity = randomDirection[random.Next(0, 2)];
+
+                //adds points
+                player2.AddPoints();
+            }
+            //checks if ball hits goal of player 2
+            if (x == width - 1)
+            {
+                //puts it back in middle
+                x = width / 2;
+
+                //randomizes X direction
+                Random random = new Random();
+                xVelocity = randomDirection[random.Next(0, 2)];
+
+                //adds points
+                player1.AddPoints();
             }
 
             //collision with player 2
-            if(x == player2.x && (y == player2.y || y == player2.y + player2.size))
+            if(x == player2.x && (y >= player2.y && y <= player2.y + player2.size))
             {
                 xVelocity = -1;
             }
 
             //collision with player 1
-            if (x == player1.x && (y == player1.y || y == player1.y + player1.size))
+            if (x == player1.x && (y >= player1.y && y <= player1.y + player1.size))
             {
                 xVelocity = 1;
             }
