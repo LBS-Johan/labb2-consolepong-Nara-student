@@ -45,6 +45,7 @@ namespace Labb2_ConsolePong
             player2.DrawPoints();
 
             //Ball
+            ball.UnDraw();
             ball.Move();
             ball.Draw();
             ball.CheckCollisions(player1, player2, width, height);

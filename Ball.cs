@@ -35,6 +35,12 @@ namespace Labb2_ConsolePong
             Console.Write("O");
         }
 
+        public void UnDraw()
+        {
+            Console.SetCursorPosition(x, y);
+            Console.Write(" ");
+        }
+
         public void CheckCollisions(Paddle player1, Paddle player2, int width, int height)
         {
             //bounce on y axis
@@ -51,6 +57,9 @@ namespace Labb2_ConsolePong
             //checks if ball hits goal of player 1
             if(x == 0)
             {
+                //clears ball
+                UnDraw();
+
                 //puts it back in middle
                 x = width / 2;
 
@@ -64,6 +73,9 @@ namespace Labb2_ConsolePong
             //checks if ball hits goal of player 2
             if (x == width - 1)
             {
+                //clears ball
+                UnDraw();
+
                 //puts it back in middle
                 x = width / 2;
 
